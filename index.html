@@ -2,15 +2,49 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>My First Mini App</title>
+  <title>Mini App Day 2</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    button {
+      padding: 12px 16px;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>🚀 Mini App работает!</h1>
+
+  <h1 id="title">Загрузка...</h1>
+  <p id="info"></p>
+
+  <button id="btn">Нажми меня</button>
 
   <script>
     const tg = window.Telegram.WebApp;
     tg.expand();
+
+    const user = tg.initDataUnsafe?.user;
+
+    if (user) {
+      document.getElementById('title').innerText =
+        `Привет, ${user.first_name}! 👋`;
+      document.getElementById('info').innerText =
+        `Твой Telegram ID: ${user.id}`;
+    } else {
+      document.getElementById('title').innerText =
+        'Привет!';
+      document.getElementById('info').innerText =
+        'Не удалось получить данные пользователя';
+    }
+
+    document.getElementById('btn').onclick = () => {
+      tg.showAlert('🎉 Кнопка работает!');
+    };
   </script>
+
 </body>
 </html>
