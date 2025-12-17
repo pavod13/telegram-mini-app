@@ -1,50 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Mini App Day 2</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIHelper</title>
+  <link rel="stylesheet" href="styles.css" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    button {
-      padding: 12px 16px;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-  </style>
 </head>
 <body>
+  <div id="app">
 
-  <h1 id="title">Загрузка...</h1>
-  <p id="info"></p>
+    <!-- START SCREEN -->
+    <section id="start-screen" class="screen">
+      <h1 id="title">Твой личный помощник</h1>
+      <p id="subtitle">Умный ИИ, который всегда рядом</p>
 
-  <button id="btn">Нажми меня</button>
+      <div class="lang-buttons">
+        <button data-lang="en">🇬🇧 English</button>
+        <button data-lang="ru">🇷🇺 Русский</button>
+        <button data-lang="ua">🇺🇦 Українська</button>
+      </div>
+    </section>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand();
+    <!-- CHAT SCREEN -->
+    <section id="chat-screen" class="screen hidden">
+      <div id="chat"></div>
 
-    const user = tg.initDataUnsafe?.user;
+      <div class="input-area">
+        <input id="user-input" type="text" placeholder="Напишите сообщение..." />
+        <button id="send-btn">➤</button>
+      </div>
+    </section>
 
-    if (user) {
-      document.getElementById('title').innerText =
-        `Привет, ${user.first_name}! 👋`;
-      document.getElementById('info').innerText =
-        `Твой Telegram ID: ${user.id}`;
-    } else {
-      document.getElementById('title').innerText =
-        'Привет!';
-      document.getElementById('info').innerText =
-        'Не удалось получить данные пользователя';
-    }
+  </div>
 
-    document.getElementById('btn').onclick = () => {
-      tg.showAlert('🎉 Кнопка работает!');
-    };
-  </script>
-
+  <script src="app.js"></script>
 </body>
 </html>
